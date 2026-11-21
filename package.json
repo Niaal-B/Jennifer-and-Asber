@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "assets": "node scripts/prepare-assets.mjs",
     "test": "vitest run",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "og": "node scripts/og-image.mjs"
   },
   "dependencies": {
     "@fontsource/bodoni-moda": "^5.1.0",

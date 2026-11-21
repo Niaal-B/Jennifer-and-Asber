@@ -17,6 +17,7 @@ var THROTTLE = {
   sameNameSeconds: 30,  // same name can't submit twice within 30s
   globalPerMinute: 30,  // total submissions accepted per minute
 };
+
 var TIMEZONE = 'Asia/Kolkata';
 
 function doPost(e) {

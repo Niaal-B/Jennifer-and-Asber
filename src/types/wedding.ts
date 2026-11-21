@@ -4,8 +4,10 @@ export interface Person {
   name: string;
   /** Relation prefix, e.g. "D/O" or "S/O". */
   relation: string;
-  /** Parents exactly as provided by the client. */
-  parents: string;
+  /** Parents exactly as provided by the client, one entry per person (kept unbroken on screen). */
+  parents: string[];
+  /** Optional grandparents line, e.g. { relation: 'Grand D/O', names: ['Late …', 'Late …'] }. */
+  grandparents?: { relation: string; names: string[] };
 }
 
 export type ScheduleIconName = 'arrival' | 'rings' | 'cake' | 'camera' | 'dining' | 'car';
@@ -45,8 +47,8 @@ export interface WeddingConfig {
   };
   venue: {
     name: string;
-    /** Short place name used in the invitation card, e.g. "Thalassery". */
-    city: string;
+    /** Locality shown after the venue name on the invitation card, e.g. "Mele Champad, Thalassery". */
+    locality: string;
     addressLines: string[];
     mapsUrl: string;
     /** Path to a line-art image of the venue. Empty = built-in stand-in drawing. */

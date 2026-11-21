@@ -62,11 +62,7 @@ await sharp(`${SRC}/painting.jpg`).webp({ quality: 74 }).toFile(`${OUT}/painting
 await sharp(`${SRC}/painting.jpg`).jpeg({ quality: 76, mozjpeg: true }).toFile(`${OUT}/painting.jpg`);
 // Small blurred version shown while the full painting loads.
 await sharp(`${SRC}/painting.jpg`).resize(48).blur(1).jpeg({ quality: 60 }).toFile(`${OUT}/painting-lqip.jpg`);
-// Link-preview image (WhatsApp / social), 1200x630.
-await sharp(`${SRC}/painting.jpg`)
-  .resize(1200, 630, { fit: 'cover', position: 'centre' })
-  .jpeg({ quality: 80, mozjpeg: true })
-  .toFile(`${OUT}/og-image.jpg`);
+// The link-preview image (og-image.jpg) is designed separately: npm run og
 
 // Tonearm: trim the transparent padding.
 await sharp(`${SRC}/tonearm.png`).trim({ threshold: 1 }).webp({ quality: 90, alphaQuality: 100 }).toFile(`${OUT}/tonearm.webp`);

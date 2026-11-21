@@ -61,9 +61,12 @@ test.describe('invitation flow', () => {
     await openInvitation(page);
     const card = page.locator('.invite');
     await expect(card).toContainText('Dr Jennifer');
-    await expect(card).toContainText('D/O Abdul Majid Kanhirandy & Mrs Saira A Majid');
+    await expect(card).toContainText('D/O Abdul Majid Kanhirandy\u00a0& Saira Majid');
+    await expect(card).toContainText('Grand D/O Late Aboobacker TK\u00a0& Late AK Abdulla');
     await expect(card).toContainText('Dr Asber');
-    await expect(card).toContainText('S/O Dr Mohammed Saleem & Dr Fathimathul Zohara');
+    await expect(card).toContainText('S/O Dr Mohammed Saleem\u00a0& Dr Fathimathul Zohara');
+    await expect(card).toContainText('Xenel, Mele Champad, Thalassery');
+    await expect(card).not.toContainText('Mrs');
     await expect(card).toContainText('Monday, 04.01.2027');
     await expect(card).toContainText('12:00 PM – 3:00 PM');
     await expect(page.locator('.hero__date')).toHaveText('04.01.2027');

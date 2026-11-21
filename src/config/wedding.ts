@@ -14,13 +14,17 @@ export const wedding: WeddingConfig = {
       title: 'Dr',
       name: 'Jennifer',
       relation: 'D/O',
-      parents: 'Abdul Majid Kanhirandy & Mrs Saira A Majid',
+      parents: ['Abdul Majid Kanhirandy', 'Saira Majid'],
+      grandparents: {
+        relation: 'Grand D/O',
+        names: ['Late Aboobacker TK', 'Late AK Abdulla'],
+      },
     },
     groom: {
       title: 'Dr',
       name: 'Asber',
       relation: 'S/O',
-      parents: 'Dr Mohammed Saleem & Dr Fathimathul Zohara',
+      parents: ['Dr Mohammed Saleem', 'Dr Fathimathul Zohara'],
     },
     order: 'bride-first',
   },
@@ -37,7 +41,7 @@ export const wedding: WeddingConfig = {
 
   venue: {
     name: 'Xenel',
-    city: 'Thalassery',
+    locality: 'Mele Champad, Thalassery',
     addressLines: ['Mele Champad, Thalassery,', 'Kerala, India'],
     mapsUrl: 'https://maps.app.goo.gl/63YEjHRV7ytixqBZ8?g_st=iw',
     illustration: '/images/venue.webp',
@@ -77,9 +81,10 @@ export const wedding: WeddingConfig = {
   },
 
   meta: {
-    title: 'Dr Jennifer & Dr Asber · Wedding Reception',
+    // Keep index.html (page title + link-preview tags) in sync with these.
+    title: 'Asber & Jennifer · Wedding Reception',
     description:
-      'You are warmly invited to the wedding reception of Dr Jennifer & Dr Asber on Monday, 4 January 2027 at Xenel, Thalassery.',
+      'You are warmly invited to the wedding reception of Dr Asber & Dr Jennifer on Monday, 4 January 2027 at Xenel, Mele Champad, Thalassery.',
     footerCredit: 'With love, Jennifer & Asber · 2027',
     designer: {
       label: 'Digital invitation by',
