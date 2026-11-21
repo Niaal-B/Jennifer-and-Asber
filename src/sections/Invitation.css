@@ -1,0 +1,61 @@
+.invite {
+  padding: 40px 0 56px;
+}
+
+.invite .invite__frame {
+  width: min(92vw, 540px);
+}
+
+.invite .frame__content {
+  inset: 18.5% 17% 16%;
+  gap: 0;
+}
+
+.invite p {
+  margin: 0;
+}
+
+.invite__small {
+  font-size: 3.15cqw;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+}
+
+.invite__lead {
+  margin-top: 2.6cqw !important;
+}
+
+.invite__person {
+  margin-top: 2.6cqw;
+}
+
+.invite__name {
+  font-size: 10cqw;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.invite__parents {
+  margin-top: 0.6cqw !important;
+  font-size: 3.2cqw;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.invite__amp {
+  margin-top: 1.6cqw !important;
+  font-size: 8cqw;
+  line-height: 0.9;
+}
+
+.invite__details {
+  margin-top: 3.4cqw;
+  font-size: 3.6cqw;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}

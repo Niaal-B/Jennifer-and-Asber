@@ -1,0 +1,42 @@
+import { Pause, Play } from 'lucide-react';
+import { useAudio } from '../hooks/useAudio';
+import { wedding } from '../config/wedding';
+import './VinylPlayer.css';
+
+/** Spinning record with tonearm (S2). Hidden entirely when no song file is present. */
+export function VinylPlayer() {
+  const { available, playing, toggle } = useAudio(wedding.music.src);
+  if (!available) return null;
+
+  return (
+    <div className={`vinyl ${playing ? 'is-playing' : ''}`}>
+      <div className="vinyl__stage">
+        <div className="vinyl__disc" aria-hidden="true">
+          <div className="vinyl__grooves" />
+          <div className="vinyl__label" />
+        </div>
+        <div className="vinyl__sheen" aria-hidden="true" />
+        <button
+          type="button"
+          className="vinyl__button"
+          onClick={toggle}
+          aria-pressed={playing}
+          aria-label={playing ? `Pause ${wedding.music.title}` : `Play ${wedding.music.title}`}
+        >
+          {playing ? (
+            <Pause size={30} fill="currentColor" strokeWidth={0} />
+          ) : (
+            <Play size={30} fill="currentColor" strokeWidth={0} className="vinyl__play-icon" />
+          )}
+        </button>
+        <picture className="vinyl__arm" aria-hidden="true">
+          <source srcSet="/images/tonearm.webp" type="image/webp" />
+          <img src="/images/tonearm.png" alt="" draggable={false} />
+        </picture>
+      </div>
+      <button type="button" className="vinyl__caption caps" onClick={toggle}>
+        {playing ? 'Pause song' : 'Play song'}
+      </button>
+    </div>
+  );
+}

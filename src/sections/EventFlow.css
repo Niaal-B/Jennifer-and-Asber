@@ -1,0 +1,72 @@
+.flow__title {
+  margin: 0 0 32px;
+  font-size: var(--script-lg);
+}
+
+.flow__list {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.flow__list::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  translate: -50% 0;
+  background: var(--ink);
+}
+
+.flow__item + .flow__item {
+  margin-top: 28px;
+}
+
+.flow__row {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  align-items: center;
+}
+
+.flow__icon {
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+}
+
+.flow__heart {
+  justify-self: center;
+  color: var(--ink);
+}
+
+.flow__text p {
+  margin: 0;
+}
+
+.flow__time {
+  font-family: var(--font-serif);
+  font-size: 20px;
+}
+
+.flow__label {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.flow__item.is-flipped .flow__icon {
+  order: 3;
+}
+
+.flow__item.is-flipped .flow__heart {
+  order: 2;
+}
+
+.flow__item.is-flipped .flow__text {
+  order: 1;
+}

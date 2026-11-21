@@ -1,0 +1,47 @@
+.frame {
+  position: relative;
+  width: min(88vw, 520px);
+  aspect-ratio: var(--frame-aspect);
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+.frame__art,
+.frame__art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.frame__art img {
+  object-fit: fill;
+  user-select: none;
+}
+
+.frame__content {
+  position: absolute;
+  /* Keep text inside the inner beaded border. */
+  inset: 17% 17%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Soft parchment glow behind the frame keeps text legible over busy parts of the painting. */
+.frame::before {
+  content: '';
+  position: absolute;
+  inset: 8% 4%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(232, 222, 198, 0.42), rgba(232, 222, 198, 0) 100%);
+  pointer-events: none;
+}
+
+@media (min-width: 700px) {
+  .frame::before {
+    background: radial-gradient(closest-side, rgba(232, 222, 198, 0.62), rgba(232, 222, 198, 0) 100%);
+  }
+}

@@ -1,0 +1,35 @@
+.rsvp p {
+  margin: 0;
+}
+
+.rsvp__small {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  letter-spacing: 0.02em;
+}
+
+.rsvp__script {
+  margin: 0;
+  font-size: var(--script-lg);
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.rsvp__date {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  letter-spacing: 0.04em;
+}
+
+.rsvp__lines {
+  margin: 18px 0 26px;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+}
+
+.rsvp__thanks {
+  margin-top: 14px !important;
+}

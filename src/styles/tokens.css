@@ -1,0 +1,33 @@
+:root {
+  /* Colour */
+  --ink: #3b342b;            /* text and ornaments on the painting */
+  --ink-soft: #4a4136;
+  --band: #3a332a;           /* dark sections and footer */
+  --band-deep: #2f2922;
+  --band-text: #bdb4a3;      /* light text on dark bands */
+  --band-muted: #9d9483;
+  --button: #5c4e3c;
+  --button-hover: #4d4132;
+  --button-text: #f3ece0;
+  --parchment: #efe7d6;      /* RSVP dialog panel */
+  --parchment-line: #b9ab90;
+  --accent: #a8926d;         /* map pin, focus rings */
+  --error: #8a3b2b;
+  --haze: rgba(226, 214, 188, 0.2); /* warm wash over the painting */
+
+  /* Type */
+  --font-script: 'Pinyon Script', 'Snell Roundhand', cursive;
+  --font-serif: 'Bodoni Moda', 'Didot', 'Times New Roman', serif;
+  --font-text: 'Cormorant Garamond', 'Garamond', 'Times New Roman', serif;
+  --font-sans: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+
+  --caps-tracking: 0.08em;
+  --script-xl: clamp(46px, 14vw, 72px);
+  --script-lg: clamp(40px, 12vw, 64px);
+  --script-md: clamp(32px, 9vw, 46px);
+
+  /* Layout */
+  --column: 560px;
+  --gutter: 20px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

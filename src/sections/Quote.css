@@ -1,0 +1,52 @@
+.quote {
+  padding-block: 72px 80px;
+}
+
+/* When Event Flow is hidden the venue and quote bands meet: join them with a small ornament. */
+.venue + .quote {
+  padding-top: 0;
+}
+
+.venue + .quote::before {
+  content: '';
+  display: block;
+  width: 120px;
+  height: 9px;
+  margin: 0 auto 56px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 9'%3E%3Cpath d='M0 4.5h50M70 4.5h50' stroke='%239d9483' stroke-width='1'/%3E%3Cpath d='M60 0l4.5 4.5L60 9l-4.5-4.5z' fill='%239d9483'/%3E%3C/svg%3E") center / contain no-repeat;
+  opacity: 0.7;
+}
+
+.quote__figure {
+  margin: 0;
+}
+
+.quote__text {
+  margin: 0;
+}
+
+.quote__text p {
+  margin: 0 auto;
+  max-width: 22ch;
+  font-size: clamp(30px, 8.6vw, 48px);
+  line-height: 1.2;
+  color: var(--band-muted);
+  text-wrap: balance;
+}
+
+.quote__mark {
+  display: inline-block;
+  vertical-align: 0.9em;
+  margin: 0 0.15em;
+  font-family: var(--font-serif);
+  font-size: 0.42em;
+  line-height: 0;
+}
+
+.quote__source {
+  margin-top: 16px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: var(--band-muted);
+  opacity: 0.85;
+}

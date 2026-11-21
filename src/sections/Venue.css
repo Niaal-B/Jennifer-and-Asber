@@ -1,0 +1,49 @@
+.venue {
+  padding-block: 88px 64px;
+}
+
+.venue__art {
+  width: min(88vw, 460px);
+  margin: 0 auto;
+  color: #c8bead;
+}
+
+.venue__art img {
+  width: 100%;
+  height: auto;
+}
+
+.venue__name {
+  margin: 28px 0 0;
+  font-size: clamp(48px, 14vw, 72px);
+  color: var(--band-muted);
+}
+
+.venue__address {
+  display: flex;
+  flex-direction: column;
+  margin-top: 18px;
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--band-muted);
+}
+
+.venue__map {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 34px;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: var(--band-muted);
+  font-size: 17px;
+  transition: color 0.2s ease, transform 0.3s var(--ease-out);
+}
+
+.venue__map:hover {
+  color: var(--band-text);
+  transform: translateY(-2px);
+}
