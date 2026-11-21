@@ -62,7 +62,12 @@ export interface WeddingConfig {
   /** Leave empty to hide the Contact block. */
   contacts: Contact[];
   music: {
-    /** Path to the song in /public. The player hides itself if the file is missing. */
+    /**
+     * YouTube video ID to play as background music (from youtu.be/<ID>).
+     * Takes priority over `src`. Leave empty to use an audio file instead.
+     */
+    youtubeId: string;
+    /** Path to an audio file in /public, used when `youtubeId` is empty. */
     src: string;
     title: string;
   };
@@ -78,5 +83,7 @@ export interface WeddingConfig {
     title: string;
     description: string;
     footerCredit: string;
+    /** Small designer credit under the footer. null to hide. */
+    designer: { label: string; handle: string; url: string } | null;
   };
 }

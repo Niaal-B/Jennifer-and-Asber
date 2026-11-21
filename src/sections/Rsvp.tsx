@@ -27,12 +27,16 @@ export function Rsvp() {
 
         <div className="rsvp__lines">
           {stored ? (
-            <p>
-              Thank you, {stored.name}.<br />
-              {stored.attendance === 'attending'
-                ? `We have your RSVP for ${stored.guests} ${stored.guests === 1 ? 'guest' : 'guests'}.`
-                : 'We have received your response.'}
-            </p>
+            <>
+              <p>
+                Thank you!
+                <br />
+                Your response has been received.
+              </p>
+              <p className="rsvp__thanks rsvp__signoff">
+                With love, Jennifer <span className="amp">&amp;</span> Asber
+              </p>
+            </>
           ) : (
             rsvp.lines.map((line, i) => (
               <p key={line} className={i === rsvp.lines.length - 1 ? 'rsvp__thanks' : undefined}>

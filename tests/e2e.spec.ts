@@ -1,11 +1,30 @@
 import { expect, test, type Page } from '@playwright/test';
 
 const MAPS_URL = 'https://maps.app.goo.gl/63YEjHRV7ytixqBZ8?g_st=iw';
+const YOUTUBE = /youtube\.com|ytimg\.com|googlevideo\.com|youtube-nocookie\.com/;
+
+// Keep tests independent of the internet: block YouTube except where a test opts in.
+test.beforeEach(async ({ page }, info) => {
+  if (!info.title.includes('[network]')) await page.route(YOUTUBE, (r) => r.abort());
+});
 
 async function openInvitation(page: Page) {
   await page.goto('/');
   await page.getByRole('button', { name: 'Open' }).click();
   await expect(page.locator('.hero')).toBeVisible({ timeout: 10_000 });
+}
+
+/** Wait until the hidden YouTube player has loaded and can play. */
+async function waitForYouTubeReady(page: Page) {
+  await page.waitForFunction(
+    () => {
+      const f = document.querySelector('iframe[src*="youtube"]');
+      const yt = (window as unknown as { YT?: { get?: (id: string) => { getPlayerState?: () => number } } }).YT;
+      return !!(f && yt?.get?.(f.id)?.getPlayerState);
+    },
+    undefined,
+    { timeout: 30_000 },
+  );
 }
 
 async function openRsvp(page: Page) {
@@ -18,7 +37,10 @@ test.describe('invitation flow', () => {
   test('cover shows the couple and opens the invitation', async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (e) => errors.push(String(e)));
-    page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+    page.on('console', (m) => {
+      // Network errors from YouTube being blocked in tests are expected.
+      if (m.type() === 'error' && !/Failed to load resource|ERR_FAILED/.test(m.text())) errors.push(m.text());
+    });
 
     await page.goto('/');
     await expect(page.locator('.cover__names')).toContainText('Jennifer');
@@ -61,30 +83,48 @@ test.describe('invitation flow', () => {
     await expect(link).toHaveAttribute('target', '_blank');
   });
 
+  test('footer credits the designer on Instagram', async ({ page }) => {
+    await page.goto('/');
+    const link = page.getByRole('link', { name: '@niaal._' });
+    await expect(link).toHaveAttribute('href', 'https://www.instagram.com/niaal._/');
+    await expect(page.locator('.site-footer')).toContainText('With love, Jennifer & Asber');
+  });
+
   test('sections without client data stay hidden', async ({ page }) => {
     await openInvitation(page);
     await expect(page.locator('.flow')).toHaveCount(0);
     await expect(page.locator('.contact')).toHaveCount(0);
-    // No song file in /public/audio yet, so no player.
-    await expect(page.locator('.vinyl')).toHaveCount(0);
   });
 
-  test('vinyl player toggles when a song exists', async ({ page }) => {
-    // Serve a tiny silent WAV in place of the song.
-    const wav = Buffer.alloc(44 + 1600);
-    wav.write('RIFF', 0); wav.writeUInt32LE(36 + 1600, 4); wav.write('WAVEfmt ', 8);
-    wav.writeUInt32LE(16, 16); wav.writeUInt16LE(1, 20); wav.writeUInt16LE(1, 22);
-    wav.writeUInt32LE(8000, 24); wav.writeUInt32LE(8000, 28); wav.writeUInt16LE(1, 32);
-    wav.writeUInt16LE(8, 34); wav.write('data', 36); wav.writeUInt32LE(1600, 40); wav.fill(128, 44);
-    await page.route('**/audio/song.mp3', (r) => r.fulfill({ contentType: 'audio/wav', body: wav }));
-
-    await openInvitation(page);
-    const button = page.getByRole('button', { name: /play our song/i });
-    await expect(button).toBeVisible();
-    await button.click();
-    await expect(page.locator('.vinyl')).toHaveClass(/is-playing/);
+  test('YouTube music starts on Open and the record toggles it [network]', async ({ page }) => {
+    test.setTimeout(90_000);
+    await page.goto('/');
+    await waitForYouTubeReady(page);
+    await page.getByRole('button', { name: 'Open' }).click();
+    await expect(page.locator('.vinyl')).toHaveClass(/is-playing/, { timeout: 15_000 });
     await page.getByRole('button', { name: /pause our song/i }).click();
     await expect(page.locator('.vinyl')).not.toHaveClass(/is-playing/);
+    await page.getByRole('button', { name: /play our song/i }).click();
+    await expect(page.locator('.vinyl')).toHaveClass(/is-playing/, { timeout: 10_000 });
+  });
+
+  test('Open tapped before YouTube loads: music starts by the next tap [network]', async ({ page }) => {
+    test.setTimeout(90_000);
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Open' }).click(); // as early as possible
+    await waitForYouTubeReady(page);
+    // Either it already started, or the guest's next tap starts it.
+    await page.locator('.hero__date').click();
+    await expect(page.locator('.vinyl')).toHaveClass(/is-playing/, { timeout: 15_000 });
+  });
+
+  test('site still works when YouTube is blocked', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('pageerror', (e) => errors.push(String(e)));
+    await openInvitation(page);
+    await expect(page.locator('.vinyl')).toHaveCount(0);
+    await expect(page.locator('.invite')).toBeVisible();
+    expect(errors).toEqual([]);
   });
 
   test('back to top returns to the hero', async ({ page }) => {
@@ -125,8 +165,8 @@ test.describe('RSVP', () => {
     expect(String(sent.submissionId)).toMatch(/^[0-9a-f-]{36}$/);
 
     await page.getByRole('button', { name: 'Close' }).first().click();
-    await expect(page.locator('.rsvp__lines')).toContainText('Thank you, Fathima Rahman.');
-    await expect(page.locator('.rsvp__lines')).toContainText('2 guests');
+    await expect(page.locator('.rsvp__lines')).toContainText('Your response has been received');
+    await expect(page.locator('.rsvp__lines')).not.toContainText('Fathima');
     await page.reload();
     await page.getByRole('button', { name: 'Open' }).click();
     await expect(page.getByRole('button', { name: 'Update RSVP' })).toBeVisible();

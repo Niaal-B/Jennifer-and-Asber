@@ -1,11 +1,11 @@
 import { Pause, Play } from 'lucide-react';
-import { useAudio } from '../hooks/useAudio';
+import { useMusic } from '../music/musicContext';
 import { wedding } from '../config/wedding';
 import './VinylPlayer.css';
 
-/** Spinning record with tonearm (S2). Hidden entirely when no song file is present. */
+/** Spinning record with tonearm (S2): play/pause for the background music. Hidden when no song is configured. */
 export function VinylPlayer() {
-  const { available, playing, toggle } = useAudio(wedding.music.src);
+  const { available, playing, toggle } = useMusic();
   if (!available) return null;
 
   return (

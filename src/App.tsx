@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import { Backdrop } from './components/Backdrop';
 import { Footer } from './components/Footer';
+import { useMusic } from './music/musicContext';
 import { Closing } from './sections/Closing';
 import { Countdown } from './sections/Countdown';
 import { Cover } from './sections/Cover';
@@ -13,9 +14,12 @@ import { Venue } from './sections/Venue';
 
 export default function App() {
   const [opened, setOpened] = useState(false);
+  const music = useMusic();
 
   const open = () => {
     if (opened) return;
+    // Must run inside the tap handler: browsers only allow sound after a user gesture.
+    music.play();
     window.scrollTo({ top: 0 });
     setOpened(true);
   };

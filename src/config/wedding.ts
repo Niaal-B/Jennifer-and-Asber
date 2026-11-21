@@ -60,7 +60,10 @@ export const wedding: WeddingConfig = {
   // Example: { role: "Bride's Father", name: '…', whatsapp: '919876543210' }
   contacts: [],
 
+  // Starts when the guest taps OPEN and loops endlessly.
+  // "Dheema Dheema" piano by Pianist Ram: https://youtu.be/SGxMtHCisZU
   music: {
+    youtubeId: 'SGxMtHCisZU',
     src: '/audio/song.mp3',
     title: 'Our song',
   },
@@ -78,6 +81,11 @@ export const wedding: WeddingConfig = {
     description:
       'You are warmly invited to the wedding reception of Dr Jennifer & Dr Asber on Monday, 4 January 2027 at Xenel, Thalassery.',
     footerCredit: 'With love, Jennifer & Asber · 2027',
+    designer: {
+      label: 'Digital invitation by',
+      handle: '@niaal._',
+      url: 'https://www.instagram.com/niaal._/',
+    },
   },
 };
 

@@ -33,3 +33,10 @@
 .rsvp__thanks {
   margin-top: 14px !important;
 }
+
+.rsvp__signoff {
+  font-family: var(--font-script);
+  font-size: 30px;
+  letter-spacing: 0;
+  color: var(--ink);
+}

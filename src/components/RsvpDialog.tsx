@@ -135,8 +135,8 @@ function DialogBody({ onClose, onSubmitted, initial }: Omit<Props, 'open'>) {
             <h2 id={titleId} className="script rsvp-dialog__title">Thank you</h2>
             <p className="rsvp-dialog__lead">
               {attendance === 'attending'
-                ? `We look forward to celebrating with you, ${name.trim()}.`
-                : `Thank you for letting us know, ${name.trim()}. You will be missed.`}
+                ? 'We look forward to celebrating with you.'
+                : 'Thank you for letting us know. You will be missed.'}
             </p>
             <button type="button" className="btn" onClick={onClose}>
               Close

@@ -7,6 +7,8 @@ export default defineConfig({
   testMatch: /.*\.spec\.ts/,
   timeout: 30_000,
   fullyParallel: true,
+  // The dev server compiles on demand; too many parallel browsers makes timings flaky.
+  workers: 4,
   reporter: 'list',
   use: {
     baseURL: `http://localhost:${PORT}`,
