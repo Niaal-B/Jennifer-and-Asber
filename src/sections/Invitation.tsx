@@ -5,7 +5,7 @@ import type { Person } from '../types/wedding';
 import './Invitation.css';
 
 /**
- * "D/O Name One & Name Two": each name stays on one line (so "Dr" never gets
+ * "D/o Name One & Name Two": each name stays on one line (so "Dr" never gets
  * separated from its name), and lines only break between people, after the "&".
  */
 function NameList({ relation, names }: { relation: string; names: string[] }) {
@@ -14,7 +14,7 @@ function NameList({ relation, names }: { relation: string; names: string[] }) {
       {names.map((n, i) => (
         <span key={n}>
           <span className="invite__nowrap">
-            {i === 0 && `${relation} `}
+            {i === 0 && <span className="invite__relation">{relation} </span>}
             {n}
             {i < names.length - 1 && '\u00a0&'}
           </span>

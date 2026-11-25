@@ -2,11 +2,11 @@ export interface Person {
   /** Honorific shown before the name, e.g. "Dr". */
   title: string;
   name: string;
-  /** Relation prefix, e.g. "D/O" or "S/O". */
+  /** Relation prefix, e.g. "D/o" or "S/o". */
   relation: string;
   /** Parents exactly as provided by the client, one entry per person (kept unbroken on screen). */
   parents: string[];
-  /** Optional grandparents line, e.g. { relation: 'Grand D/O', names: ['Late …', 'Late …'] }. */
+  /** Optional grandparents line, e.g. { relation: 'Grand D/o', names: ['Late …', 'Late …'] }. */
   grandparents?: { relation: string; names: string[] };
 }
 

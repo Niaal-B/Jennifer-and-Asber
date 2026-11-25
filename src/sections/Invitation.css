@@ -64,6 +64,10 @@
   white-space: nowrap;
 }
 
+.invite__relation {
+  text-transform: none;
+}
+
 .invite__grandparents {
   margin-top: 0.6cqw !important;
   font-size: 2.75cqw;

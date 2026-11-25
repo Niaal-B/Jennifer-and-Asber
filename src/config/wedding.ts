@@ -13,17 +13,17 @@ export const wedding: WeddingConfig = {
     bride: {
       title: 'Dr',
       name: 'Jennifer',
-      relation: 'D/O',
+      relation: 'D/o',
       parents: ['Abdul Majid Kanhirandy', 'Saira Majid'],
       grandparents: {
-        relation: 'Grand D/O',
+        relation: 'Grand D/o',
         names: ['Late Aboobacker TK', 'Late AK Abdulla'],
       },
     },
     groom: {
       title: 'Dr',
       name: 'Asber',
-      relation: 'S/O',
+      relation: 'S/o',
       parents: ['Dr Mohammed Saleem', 'Dr Fathimathul Zohara'],
     },
     order: 'bride-first',
@@ -50,7 +50,7 @@ export const wedding: WeddingConfig = {
   // Wording is pending client sign-off.
   invitation: {
     invocation: 'In the name of Allah, the Most Gracious, the Most Merciful',
-    inviteLine: 'We cordially invite you to the wedding reception of',
+    inviteLine: 'We cordially invite you to the wedding reception of our daughter',
   },
 
   quote: {
