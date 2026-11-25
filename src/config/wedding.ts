@@ -11,12 +11,12 @@ import type { WeddingConfig } from '../types/wedding';
 export const wedding: WeddingConfig = {
   couple: {
     bride: {
-      title: 'Mr.',
+      title: 'Dr.',
       name: 'Jennifer',
       relation: 'Mr.',
       parents: ['Abdul Majid Kanhirandy', 'Saira Majid'],
       grandparents: {
-        relation: 'Grand D/o',
+        relation: 'GRAND D/o',
         names: ['Late Aboobacker TK', 'Late AK Abdulla'],
       },
     },
