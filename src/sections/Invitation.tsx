@@ -25,15 +25,17 @@ function NameList({ relation, names }: { relation: string; names: string[] }) {
   );
 }
 
-function PersonBlock({ person }: { person: Person }) {
+function PersonBlock({ person, showParents = true }: { person: Person; showParents?: boolean }) {
   return (
     <div className="invite__person">
       <p className="script invite__name">
         {person.title} {person.name}
       </p>
-      <p className="caps invite__parents">
-        <NameList relation={person.relation} names={person.parents} />
-      </p>
+      {showParents && (
+        <p className="caps invite__parents">
+          <NameList relation={person.relation} names={person.parents} />
+        </p>
+      )}
       {person.grandparents && (
         <p className="caps invite__grandparents">
           <NameList relation={person.grandparents.relation} names={person.grandparents.names} />
@@ -52,8 +54,11 @@ export function Invitation() {
       <Reveal>
         <Frame variant="invite" aspect={0.575} className="invite__frame">
           <p className="caps invite__small">{invitation.invocation}</p>
+          <p className="caps invite__parents invite__hosts">
+            <NameList relation={first.relation} names={first.parents} />
+          </p>
           <p className="caps invite__small invite__lead">{invitation.inviteLine}</p>
-          <PersonBlock person={first} />
+          <PersonBlock person={first} showParents={false} />
           <p className="invite__amp amp">&amp;</p>
           <PersonBlock person={second} />
           <div className="caps invite__details">
